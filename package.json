@@ -1,0 +1,17 @@
+{
+  "name": "kafka-interface-v1",
+  "version": "1.0.0",
+  "description": "kafka interface to be used in microservices",
+  "main": "index.js",
+  "keywords": [
+    "kafka",
+    "interface",
+    "microservices"
+  ],
+  "author": "hssntowfik",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "kafkajs": "^2.2.4"
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "name": "kafka-interface-v1",
-  "version": "1.0.0",
+  "name": "kafka-interface",
+  "version": "1.1.0",
   "description": "kafka interface to be used in microservices",
   "main": "index.js",
   "keywords": [

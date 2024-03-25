@@ -6,7 +6,7 @@
 npm install kafka-interface
 ```
 #### <a name="usage"></a> Usage
-#### <a name="Producer"></a> Usage
+#### <a name="Producer"></a> Producer
 ```javascript
 // Producer config
 const producer = require('kafka-interface');
@@ -21,7 +21,7 @@ producer.acknowledgementLevel = 0;
 producer.produceMessage('topicName', 'userCreate', {"userId": 55, "name": "full name"});
 ```
 
-#### <a name="Consumer"></a> Usage
+#### <a name="Consumer"></a> Consumer
 ```javascript
 // consumer config
 const consumer = require('kafka-interface');

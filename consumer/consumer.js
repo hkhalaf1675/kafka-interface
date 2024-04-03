@@ -21,7 +21,7 @@ kafkaConsumer.fromBeginning = false;
 
 /**
    *
-   * @param {Array<object>} params Example: [{topic_name: 'topic', callback: callback()}]
+   * @param {object} params Example: (topics: [topic_1, topic_2, ...], callback: function())
    */
 kafkaConsumer.consumeMessage = async(params) => {
     try {
@@ -40,30 +40,25 @@ kafkaConsumer.consumeMessage = async(params) => {
     
         await consumer.connect();
 
-        for(const param of params){
-            if(param.topic_name){
-                await consumer.subscribe({ topic: param.topic_name, fromBeginning: kafkaConsumer.fromBeginning });
-                await consumer.run({
-                    eachMessage: async ({ topic, partition, message }) => {
-                        try{
-                            const messagePayload = JSON.parse(message.value.toString());
-                            if(param.callback){
-                                param.callback(messagePayload);
-                            }
-                            else{
-                                console.log("Error: object not have callback function . ex of obj {topic_name: 'topic', callback: function()");
-                            }
-                        }
-                        catch(error){
-                            console.log(`Error in parsing: ${error}`);
-                        }
+        await consumer.subscribe({topics: params.topics});
+
+        await consumer.run({
+            eachMessage: async ({ topic, partition, message }) => {
+                try{
+                    const messagePayload = JSON.parse(message.value.toString());
+                    if(params.callback){
+                        params.callback(messagePayload);
                     }
-                });
+                    else{
+                        console.log("Error: object not have callback function . ex of obj {topic_name: 'topic', callback: function()");
+                    }
+                }
+                catch(error){
+                    console.log(`Error in parsing: ${error}`);
+                }
             }
-            else{
-                console.log('Error: Not valid object: ex of obj { topic_name: "topic", callback: function()}');
-            }
-        }
+        });
+        
     } catch (error) {
         console.log({error: error.message});
     }

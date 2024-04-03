@@ -31,8 +31,16 @@ consumer.groupId = 'my-group';
 consumer.fromBeginning = true;
 
 // consume message
-// take array of object{topic_name: "topicName", callback: function()}
-consumer.consumeMessage([{topic_name: "topicName", callback: (payload) => {
-    console.log(payload);
-}}]);
+// take object{topics: {[topic_1, topic_1], callback: function()}
+consumer.consumeMessage( {topics: [topic_1, topic_2], callback: (message) => {
+    const payload = message.payload
+    if(message.type == "type1"){
+        
+        // handle logic of messages
+    }
+    else{
+        
+        // handle logic of messages
+    }
+}});
 ```

@@ -47,7 +47,7 @@ kafkaConsumer.consumeMessage = async(params) => {
                 try{
                     const messagePayload = JSON.parse(message.value.toString());
                     if(params.callback){
-                        params.callback(messagePayload);
+                        params.callback(topic, messagePayload);
                     }
                     else{
                         console.log("Error: object not have callback function . ex of obj {topic_name: 'topic', callback: function()");

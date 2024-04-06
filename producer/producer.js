@@ -24,10 +24,9 @@ kafkaProducer.acknowledgementLevel = 1;
 /**
    *
    * @param {String} topic Example: 'topic_1'
-   * @param {String} messageType Example: 'userType' , 'createType'
    * @param {object} payload Example: {username: 'username', password: 'password'}
    */
-kafkaProducer.produceMessage = async(topic, messageType, payload) => {
+kafkaProducer.produceMessage = async(topic, payload) => {
     try {
         if(!kafka){
             kafka = new Kafka({
@@ -43,8 +42,7 @@ kafkaProducer.produceMessage = async(topic, messageType, payload) => {
             });
         }
         const message = {
-            "type": messageType,
-            "payload": payload
+            payload
         };
 
         const run = async() => {

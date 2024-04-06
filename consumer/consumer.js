@@ -21,7 +21,7 @@ kafkaConsumer.fromBeginning = false;
 
 /**
    *
-   * @param {object} params Example: (topics: [topic_1, topic_2, ...], callback: function())
+   * @param {object} params Example: ({topics: [topic_1, topic_2, ...], callback: function()})
    */
 kafkaConsumer.consumeMessage = async(params) => {
     try {
@@ -45,7 +45,8 @@ kafkaConsumer.consumeMessage = async(params) => {
         await consumer.run({
             eachMessage: async ({ topic, partition, message }) => {
                 try{
-                    const messagePayload = JSON.parse(message.value.toString());
+                    let messagePayload = JSON.parse(message.value.toString());
+                    messagePayload = messagePayload.payload || messagePayload;
                     if(params.callback){
                         params.callback(topic, messagePayload);
                     }
